@@ -1,0 +1,8 @@
+.main-scatterplot-section {
+  border: 1px solid var(--secondary-color);
+  height: 60vh;
+}
+
+.showcase {
+  margin: 1rem;
+}

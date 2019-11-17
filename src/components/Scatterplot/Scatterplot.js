@@ -3,8 +3,10 @@ import './Scatterplot.css';
 
 const Scatterplot = () => {
   return (
-    <div>
-      <h1>Scatterplot</h1>
+    <div className='main-scatterplot-section'>
+      <div className='showcase'>
+        <h2>P. Mass vs P. Gravity</h2>
+      </div>
     </div>
   );
 };

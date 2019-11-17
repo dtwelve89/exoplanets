@@ -3,8 +3,13 @@ import './Dropdowns.css';
 
 const Dropdowns = () => {
   return (
-    <div>
-      <h1>Dropdowns</h1>
+    <div className='main-dropdown-section'>
+      <div className='axis'>
+        <h2>X-Axis</h2>
+      </div>
+      <div className='axis'>
+        <h2>Y-Axis</h2>
+      </div>
     </div>
   );
 };

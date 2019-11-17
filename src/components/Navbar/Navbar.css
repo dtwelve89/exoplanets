@@ -1,0 +1,7 @@
+.main-nav-section {
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--secondary-color);
+  height: 10vh;
+}

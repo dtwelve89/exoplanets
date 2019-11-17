@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Navbar from './components/Navbar/Navbar';
 import Dropdowns from './components/Dropdowns/Dropdowns';
 import Scatterplot from './components/Scatterplot/Scatterplot';
 import * as d3 from 'd3';
-import phl from './phl_hec_all_confirmed.csv';
+import phl from './data/phl_hec_all_confirmed.csv';
 import './App.css';
 
 const App = () => {
@@ -17,7 +17,7 @@ const App = () => {
   }, []);
 
   return (
-    <div>
+    <div className='container'>
       <Navbar />
       <Dropdowns />
       <Scatterplot />

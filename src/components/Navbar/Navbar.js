@@ -3,9 +3,9 @@ import './Navbar.css';
 
 const Navbar = () => {
   return (
-    <div>
+    <nav className='main-nav-section'>
       <h1>Exoplanet Data Explorer</h1>
-    </div>
+    </nav>
   );
 };
 
