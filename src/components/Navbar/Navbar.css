@@ -1,7 +1,8 @@
 .main-nav-section {
-  font-size: 1.4rem;
+  color: var(--secondary-color);
+  font-size: 1rem;
   display: flex;
   align-items: center;
-  border: 1px solid var(--secondary-color);
   height: 10vh;
+  margin: 0 2rem;
 }

@@ -1,10 +1,9 @@
 .main-dropdown-section {
-  display: flex;
   border: 1px solid var(--secondary-color);
   height: 20vh;
 }
 
-.axis {
+/* .axis {
   margin: 1rem;
   width: 50%;
-}
+} */
