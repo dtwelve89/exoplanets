@@ -2,7 +2,6 @@ import React from 'react';
 import * as d3 from 'd3';
 import './Scatterplot.css';
 
-// Scatterplot
 class Scatterplot extends React.Component {
   constructor(props) {
     super(props);
@@ -19,6 +18,7 @@ class Scatterplot extends React.Component {
   componentDidUpdate() {
     this.update();
   }
+
   updateScales() {
     // Calculate limits
     let xMin = d3.min(this.props.data, d => +d.x * 0.9);
@@ -76,14 +76,15 @@ class Scatterplot extends React.Component {
       .ticks(5, 's');
 
     d3.select(this.xAxis).call(xAxisFunction);
-
     d3.select(this.yAxis).call(yAxisFunction);
   }
+
   update() {
     this.updateScales();
     this.updateAxes();
     this.updatePoints();
   }
+
   render() {
     return (
       <div className='chart-wrapper'>
@@ -141,10 +142,6 @@ class Scatterplot extends React.Component {
 }
 
 Scatterplot.defaultProps = {
-  data: [
-    { x: 10, y: 20 },
-    { x: 15, y: 35 }
-  ],
   width: 800,
   height: 500,
   radius: 3,
@@ -154,9 +151,7 @@ Scatterplot.defaultProps = {
     right: 10,
     top: 20,
     bottom: 50
-  },
-  xTitle: 'X Title',
-  yTitle: 'Y Title'
+  }
 };
 
 export default Scatterplot;

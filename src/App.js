@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar/Navbar';
 import Scatterplot from './components/Scatterplot/Scatterplot';
-import * as d3 from 'd3';
 import phl from './data/phl_hec_all_confirmed.csv';
-// import test from './data/test.csv';
+import * as d3 from 'd3';
 import './App.css';
-
-let loaded = false;
 
 const App = () => {
   // Set initial state
@@ -14,20 +11,10 @@ const App = () => {
   const [xVar, setXvar] = useState('P. ESI');
   const [yVar, setYvar] = useState('P. Radius (EU)');
 
-  // Load data onmount
+  // Load data on initial mount
   useEffect(() => {
     d3.csv(phl).then(setData);
   }, []);
-
-  useEffect(() => {
-    if (loaded) {
-      // console.log(data);
-      // console.log(allData);
-      // console.log(options);
-    } else {
-      loaded = true;
-    }
-  });
 
   // Filtered list of possible x and y axes
   let options = data.length === 0 ? [] : Object.keys(data[0]);
@@ -52,11 +39,10 @@ const App = () => {
   );
 
   // Store all of the data to be plotted
-  let allData = data.map(d => {
+  let allData = data.map(datum => {
     return {
-      x: d[xVar],
-      y: d[yVar]
-      // label: d.county + ', ' + d.state
+      x: datum[xVar],
+      y: datum[yVar]
     };
   });
 
