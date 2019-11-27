@@ -51,6 +51,7 @@ const Scatterplot = props => {
   // Use the .exit() and .remove() methods to remove elements that are no longer in the data
   circles.exit().remove();
 
+  // Define Axes
   const xAxisFunction = d3
     .axisBottom()
     .scale(xScale)
