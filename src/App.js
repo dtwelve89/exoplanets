@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from './components/Navbar/Navbar';
-import Scatterplot from './components/Scatterplot/Scatterplot';
+import Navbar from './components/Navbar';
+import Scatterplot from './components/Scatterplot';
 import phl from './data/phl_hec_all_confirmed.csv';
 import * as d3 from 'd3';
 import './App.css';
