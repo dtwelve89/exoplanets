@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import * as d3 from 'd3';
 import './Scatterplot.css';
 
@@ -11,70 +11,58 @@ const Scatterplot = props => {
   const drawWidth = props.width - props.margin.left - props.margin.right;
   const drawHeight = props.height - props.margin.top - props.margin.bottom;
 
-  useEffect(() => {
-    update();
-  }, []);
+  // Calculate limits
+  const xMin = d3.min(props.data, d => +d.x * 0.9);
+  const xMax = d3.max(props.data, d => +d.x * 1.1);
+  const yMin = d3.min(props.data, d => +d.y * 0.9);
+  const yMax = d3.max(props.data, d => +d.y * 1.1);
 
-  // Whenever the component updates, select the <g> from the DOM, and use D3 to manipulte circles
-  useEffect(() => {
-    update();
-  });
+  // Define scales
+  const xScale = d3
+    .scaleLinear()
+    .domain([xMin, xMax])
+    .range([0, drawWidth]);
+  const yScale = d3
+    .scaleLinear()
+    .domain([yMax, yMin])
+    .range([0, drawHeight]);
 
-  const update = () => {
-    // Calculate limits
-    let xMin = d3.min(props.data, d => +d.x * 0.9);
-    let xMax = d3.max(props.data, d => +d.x * 1.1);
-    let yMin = d3.min(props.data, d => +d.y * 0.9);
-    let yMax = d3.max(props.data, d => +d.y * 1.1);
+  // Select all circles and bind data
+  const circles = d3
+    .select(chartAreaRef.current)
+    .selectAll('circle')
+    .data(props.data);
 
-    // Define scales
-    let xScale = d3
-      .scaleLinear()
-      .domain([xMin, xMax])
-      .range([0, drawWidth]);
-    let yScale = d3
-      .scaleLinear()
-      .domain([yMax, yMin])
-      .range([0, drawHeight]);
+  // Use the .enter() method to get your entering elements, and assign their positions
+  circles
+    .enter()
+    .append('circle')
+    .merge(circles)
+    .attr('r', d => props.radius)
+    .attr('fill', d => props.color)
+    .style('fill-opacity', 0.3)
+    .transition()
+    .duration(500)
+    .attr('cx', d => xScale(d.x))
+    .attr('cy', d => yScale(d.y))
+    .style('stroke', 'black')
+    .style('stroke-width', d => (d.selected === true ? '2px' : '0px'));
 
-    // Select all circles and bind data
-    let circles = d3
-      .select(chartAreaRef.current)
-      .selectAll('circle')
-      .data(props.data);
+  // Use the .exit() and .remove() methods to remove elements that are no longer in the data
+  circles.exit().remove();
 
-    // Use the .enter() method to get your entering elements, and assign their positions
-    circles
-      .enter()
-      .append('circle')
-      .merge(circles)
-      .attr('r', d => props.radius)
-      .attr('fill', d => props.color)
-      .attr('label', d => d.label)
-      .style('fill-opacity', 0.3)
-      .transition()
-      .duration(500)
-      .attr('cx', d => xScale(d.x))
-      .attr('cy', d => yScale(d.y))
-      .style('stroke', 'black')
-      .style('stroke-width', d => (d.selected === true ? '2px' : '0px'));
+  const xAxisFunction = d3
+    .axisBottom()
+    .scale(xScale)
+    .ticks(5, 's');
 
-    // Use the .exit() and .remove() methods to remove elements that are no longer in the data
-    circles.exit().remove();
+  const yAxisFunction = d3
+    .axisLeft()
+    .scale(yScale)
+    .ticks(5, 's');
 
-    let xAxisFunction = d3
-      .axisBottom()
-      .scale(xScale)
-      .ticks(5, 's');
-
-    let yAxisFunction = d3
-      .axisLeft()
-      .scale(yScale)
-      .ticks(5, 's');
-
-    d3.select(xAxisRef.current).call(xAxisFunction);
-    d3.select(yAxisRef.current).call(yAxisFunction);
-  };
+  d3.select(xAxisRef.current).call(xAxisFunction);
+  d3.select(yAxisRef.current).call(yAxisFunction);
 
   return (
     <div className='chart-wrapper'>
