@@ -59,9 +59,11 @@ const App = () => {
             className='custom-select'
             onChange={e => setXvar(e.target.value)}
           >
-            {options.map(option => {
-              return <option key={option}>{option}</option>;
-            })}
+            {options
+              .filter(option => option !== yVar)
+              .map(option => {
+                return <option key={option}>{option}</option>;
+              })}
           </select>
         </div>
 
@@ -74,9 +76,11 @@ const App = () => {
             className='custom-select'
             onChange={e => setYvar(e.target.value)}
           >
-            {options.map(option => {
-              return <option key={option}>{option}</option>;
-            })}
+            {options
+              .filter(option => option !== xVar)
+              .map(option => {
+                return <option key={option}>{option}</option>;
+              })}
           </select>
         </div>
       </div>
